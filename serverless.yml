@@ -41,3 +41,8 @@ resources:
 
 custom:
   functionName: rateHandler
+
+package:
+  artifact: <+artifact.path>          
+plugins:
+  - serverless-deployment-bucket@latest  
