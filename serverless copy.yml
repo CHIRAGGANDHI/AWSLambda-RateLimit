@@ -1,0 +1,24 @@
+service: lambda-cron-sample
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.9
+  region: ap-south-1
+  timeout: 6
+  memorySize: 128
+  stage: dev
+  versionFunctions: 0.1
+
+functions:
+  rateHandler:
+    handler: handler.run
+    description: Sample Cron Example
+    events:
+      # Invoke Lambda function every minute
+      - schedule: 
+          name: lambda-cron-sample-scheduler
+          description: Invoke Lambda Function Every 5 Minute
+          rate: rate(5 minutes)
+          enabled: true

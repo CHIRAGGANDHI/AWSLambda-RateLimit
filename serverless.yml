@@ -1,0 +1,43 @@
+service: lambda-cron-sample
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.9
+  region: ap-south-1
+  timeout: 6
+  memorySize: 128
+  stage: dev
+
+functions:
+  rateHandler:
+    name: ${self:custom.functionName}
+    handler: handler.run
+    description: Sample Cron Example
+
+resources:
+  Resources:
+    CronJobTrigger:
+      Type: AWS::Events::Rule
+      Properties:        
+        Name: lambda-cron-sample-scheduler
+        Description: Invoke Lambda Function Every 5 Minute
+        ScheduleExpression: cron(*/5 * * * ? *)
+        State: ENABLED
+        Targets:
+          - Id: ${self:custom.functionName}
+            Arn: arn:aws:lambda:${self:provider.region}:${aws:accountId}:function:${self:custom.functionName}
+    LambdaInvokePermission:
+      Type: AWS::Lambda::Permission
+      Properties:
+        FunctionName: ${self:custom.functionName}
+        Action: lambda:InvokeFunction
+        Principal: events.amazonaws.com
+        SourceArn:
+          Fn::GetAtt: [CronJobTrigger, Arn]
+      DependsOn:
+        - RateHandlerLambdaFunction  
+
+custom:
+  functionName: rateHandler
