@@ -5,12 +5,13 @@ frameworkVersion: '3'
 provider:
   name: aws
   runtime: python3.9
-  region: ap-south-1
+  region: <+env.variables.region>
   timeout: 6
   memorySize: 128
   stage: dev
   environment:
-    AWS_PARAMETER_SPACE: <+env.variables.space>    
+    AWS_PARAMETER_SPACE: <+env.variables.space>   
+    AWS_REGION: <+env.variables.region>
   iam:
     role:
       statements:
