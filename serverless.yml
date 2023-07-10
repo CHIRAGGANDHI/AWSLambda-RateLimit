@@ -11,7 +11,7 @@ provider:
   stage: dev
   environment:
     AWS_PARAMETER_SPACE: <+env.variables.space>   
-    AWS_REGION: <+env.variables.region>
+    AWS_LAMBDA_REGION: <+env.variables.region>
   iam:
     role:
       statements:
