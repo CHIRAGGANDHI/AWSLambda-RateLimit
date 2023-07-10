@@ -43,6 +43,6 @@ custom:
   functionName: rateHandler
 
 package:
-  artifact: s3://lamba-code/lambda-cron-sample.zip          
+  artifact: <+artifact.path>          
 plugins:
   - serverless-deployment-bucket@latest  
