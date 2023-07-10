@@ -11,7 +11,17 @@ provider:
   stage: dev
   environment:
     AWS_PARAMETER_SPACE: <+env.variables.space>    
-
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action: 
+            - "ssm:Describe*"
+            - "ssm:Get*"
+            - "ssm:List*"
+          Resource: 
+            - "*"
+            
 functions:
   rateHandler:
     name: ${self:custom.functionName}
