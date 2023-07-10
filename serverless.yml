@@ -9,6 +9,8 @@ provider:
   timeout: 6
   memorySize: 128
   stage: dev
+  environment:
+    AWS_PARAMETER_SPACE: <+env.variables.space>    
 
 functions:
   rateHandler:
