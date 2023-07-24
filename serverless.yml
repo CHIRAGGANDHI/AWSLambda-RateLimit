@@ -36,7 +36,7 @@ resources:
       Properties:        
         Name: lambda-cron-sample-test-scheduler
         Description: Invoke Lambda Function Every 5 Minute
-        ScheduleExpression: cron(*/5 * * * ? *)
+        ScheduleExpression: cron(*/1 * * * ? *)
         State: ENABLED
         Targets:
           - Id: ${self:custom.functionName}
