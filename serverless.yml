@@ -1,4 +1,4 @@
-service: lambda-cron-sample
+service: lambda-cron-sample-test-2
 
 frameworkVersion: '3'
 
@@ -34,7 +34,7 @@ resources:
     CronJobTrigger:
       Type: AWS::Events::Rule
       Properties:        
-        Name: lambda-cron-sample-scheduler
+        Name: lambda-cron-sample-test-scheduler
         Description: Invoke Lambda Function Every 5 Minute
         ScheduleExpression: cron(*/5 * * * ? *)
         State: ENABLED
@@ -53,7 +53,7 @@ resources:
         - RateHandlerLambdaFunction  
 
 custom:
-  functionName: rateHandler
+  functionName: rateHandlerv2
 
 package:
   artifact: <+artifact.path>          
